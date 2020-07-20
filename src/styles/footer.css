@@ -1,0 +1,39 @@
+.footer {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(3,1fr);
+  padding: 35px;
+  grid-column-gap: 20px;
+  background-color: black;
+  opacity: 0.9;
+  color: white;
+  position: fixed;
+  bottom:0;
+  width: 100%;
+}
+
+  
+
+ 
+
+  
+@media screen and (max-width: 1240px){
+    .footer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px){
+    .footer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 550px){
+    .footer{
+        grid-template-columns: 1fr;
+    }
+  }
+
+
+
