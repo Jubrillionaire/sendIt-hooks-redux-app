@@ -1,10 +1,9 @@
 import { LOAD_PARCELS, EDIT_DESTINATION } from "./types";
 import { toast } from "react-toastify";
-import dotenv from 'dotenv'
 const token = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 
-dotenv.config()
+
 toast.configure();
 
 const url = process.env.REACT_APP_API_URL
@@ -30,13 +29,11 @@ export const submitAction = (userDetails) => (dispatch) => {
         localStorage.setItem("token", res.token);
         toast.success(res.msg);
         window.location="/user"
-        console.log(res.msg);
       } else if (res.msg) {
         toast.error(res.msg);
       } else {
         res.errors.forEach((err) => {
           toast.error(err.nsg);
-          console.log(err);
         });
       }
     })
@@ -70,7 +67,6 @@ export const loginAction = (loginData) => (dispatch) => {
             localStorage.setItem("userId", res.userId);
             toast.success(res.msg);
             window.location="/user"
-            console.log(data, res)
           });
       } else if (res.msg) {
         toast.error(res.msg);
@@ -98,7 +94,6 @@ export const createOrderAction = (order) => (dispatch) => {
   })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
       if (data.success === true) {
         toast.success(data.msg);
         window.location = "/user";
@@ -119,7 +114,6 @@ export const loadParcelsAction = () => (dispatch) => {
   })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       data.sort((a, b) => a.id - b.id);
      dispatch({
        type: LOAD_PARCELS,
@@ -130,7 +124,6 @@ export const loadParcelsAction = () => (dispatch) => {
 }
 
 export const editDestinationAction = (destination , id) => (dispatch) => {
-  console.log(id)
   fetch(`${url}/parcels/destination`, {
     method: "PATCH",
     headers: {
