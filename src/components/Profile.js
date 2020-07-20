@@ -28,7 +28,6 @@ function Profile(props) {
 
   const handleChange = (e) => {
     setDestination(e.target.value);
-    console.log(destination);
   };
 
   const handleEdit = (id) => {
@@ -54,26 +53,26 @@ function Profile(props) {
           <span>
             <Button color="danger" onClick={toggle}>
               edit destination
+              <Modal isOpen={modal} toggle={toggle} className={className}>
+                <ModalHeader toggle={toggle}>
+                  Please enter A preferred destination
+                </ModalHeader>
+                <ModalBody>
+                  <form onSubmit={() => handleEdit(data.id)}>
+                    <Label style={{ marginRight: 20 }}>Destination:</Label>
+                    <input type="text" onChange={handleChange} />
+                  </form>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onClick={() => handleEdit(data.id)}>
+                    Submit
+                  </Button>{" "}
+                  <Button color="secondary" onClick={toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
             </Button>
-            <Modal isOpen={modal} toggle={toggle} className={className}>
-              <ModalHeader toggle={toggle}>
-                Please enter A preferred destination
-              </ModalHeader>
-              <ModalBody>
-                <form onSubmit={() => handleEdit(data.id)}>
-                  <Label style={{ marginRight: 20 }}>Destination:</Label>
-                  <input type="text" onChange={handleChange} />
-                </form>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onClick={() => handleEdit(data.id)}>
-                  Submit
-                </Button>{" "}
-                <Button color="secondary" onClick={toggle}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </Modal>
           </span>
 
           <th scope="row">{data.id}</th>

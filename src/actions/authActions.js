@@ -29,6 +29,7 @@ export const submitAction = (userDetails) => (dispatch) => {
       if (res.token) {
         localStorage.setItem("token", res.token);
         toast.success(res.msg);
+        window.location="/user"
         console.log(res.msg);
       } else if (res.msg) {
         toast.error(res.msg);
@@ -110,7 +111,7 @@ export const createOrderAction = (order) => (dispatch) => {
 }
 
 export const loadParcelsAction = () => (dispatch) => {
-  fetch(`${url}/${userId}/parcels`, {
+  fetch(`${url}/users/${userId}/parcels`, {
     headers: {
       "Content-type": "Application/json",
       Authorization: token
