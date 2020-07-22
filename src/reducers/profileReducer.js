@@ -2,7 +2,6 @@ import { LOAD_PARCELS } from "../actions/types";
 
 const initialState = {
     parcels: [],
-    destinationRow: []
   };
 
   export default function (state = initialState, action){

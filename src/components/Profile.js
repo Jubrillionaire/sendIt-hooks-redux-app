@@ -19,9 +19,23 @@ import "../styles/profile.css";
 function Profile(props) {
   var subtitle;
 
-  useEffect(() => {
+  
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       props.loadParcelsAction();
+  //     } catch (err) {
+  //      console.log(err)
+  //     }
+  //   }
+
+  //   fetchData()
+  // }, [])
+  useEffect( ()  => {
     props.loadParcelsAction();
-  }, []);
+  })
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
