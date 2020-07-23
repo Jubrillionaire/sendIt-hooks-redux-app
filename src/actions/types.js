@@ -1,3 +1,1 @@
-export const SUBMIT_FORM = "SUBMIT_FORM";
 export const LOAD_PARCELS = "LOAD_PARCELS" 
-export const EDIT_DESTINATION = "EDIT_DESTINATION"

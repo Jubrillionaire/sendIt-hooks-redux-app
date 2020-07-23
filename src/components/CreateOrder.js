@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, FormGroup, Label, Input} from "reactstrap";
-import {createOrderAction} from '../actions/authActions'
+import {createOrderAction} from '../actions/parcelActions'
 import {connect} from 'react-redux'
 
 

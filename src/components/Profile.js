@@ -11,7 +11,7 @@ import {
   loadParcelsAction,
   editDestinationAction,
   cancelParcel,
-} from "../actions/authActions";
+} from "../actions/parcelActions";
 import { FaTrashAlt } from "react-icons/fa";
 import { connect } from "react-redux";
 import "../styles/profile.css";
@@ -19,20 +19,7 @@ import "../styles/profile.css";
 function Profile(props) {
   var subtitle;
 
-  
-
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       props.loadParcelsAction();
-  //     } catch (err) {
-  //      console.log(err)
-  //     }
-  //   }
-
-  //   fetchData()
-  // }, [])
+ 
   useEffect( ()  => {
     props.loadParcelsAction();
   })
