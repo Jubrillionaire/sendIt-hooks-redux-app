@@ -6,7 +6,7 @@ const initialState = {
     errorMsg: ""
   };
 
-  export default function (state = initialState, action){
+  export default (state = initialState, action) => {
     switch(action.type){
         case LOAD_PARCELS:
             return{

@@ -21,7 +21,6 @@ export class NavBar extends Component {
         localStorage.removeItem("token")
         window.location ="/"
     }
-//navbar navbar-expand-lg
     render() {
         return (
             <div>

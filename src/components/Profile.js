@@ -18,7 +18,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { connect } from "react-redux";
 import "../styles/profile.css";
 
-function Profile(props) {
+const Profile = (props) => {
   var subtitle;
 
  

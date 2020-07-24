@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 
 toast.configure();
 
-function CreateOrder(props) {
+const CreateOrder = (props)  => {
 
     const orderDetails = {
         pickupLocation: "",

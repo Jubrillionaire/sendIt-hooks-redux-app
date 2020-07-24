@@ -6,7 +6,7 @@ import Lucian from "../images/lucian.jpg"
 
 
 
-function Home() {
+const Home = () => {
     return (
 <div className="main">
   <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">

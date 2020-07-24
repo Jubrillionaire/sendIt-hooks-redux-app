@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { submitAction } from "../actions/authActions";
 toast.configure();
 
-function Register(props) {
+const Register = (props)  => {
   const details = {
     firstName: "",
     lastName: "",

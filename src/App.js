@@ -13,7 +13,7 @@ import { Route, Redirect } from "react-router-dom";
 
 const token = localStorage.getItem("token");
 
-function App() {
+const App  = () =>  {
   return (
     <Provider store={store}>
       <NavBar />

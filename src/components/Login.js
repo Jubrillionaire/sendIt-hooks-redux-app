@@ -5,7 +5,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import {loginAction} from '../actions/authActions';
 import { connect } from "react-redux";
 
-function Login(props) {
+const Login = (props) =>  {
 
     const [loginData, setLoginData] = useState({email: "", password: ""})
 
