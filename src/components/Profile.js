@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from "react-bootstrap/Spinner";
 import {
   Button,
   Modal,
@@ -12,35 +12,33 @@ import {
   loadParcelsAction,
   editDestinationAction,
   cancelParcel,
-  setLoading
+  setLoading,
 } from "../actions/parcelActions";
 import { FaTrashAlt } from "react-icons/fa";
 import { connect } from "react-redux";
 import "../styles/profile.css";
 
-const Profile = (props) => {
+const Profile = props => {
   let subtitle;
- 
-  useEffect( ()  => {
+
+  useEffect(() => {
     props.loadParcelsAction();
-    props.setLoading()
-  }, [])
-
-
+    props.setLoading();
+  }, []);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setDestination(e.target.value);
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = id => {
     props.editDestinationAction(destination, id);
     setModal(false);
   };
 
-  const handleCancel = (id) => {
+  const handleCancel = id => {
     props.cancelParcel(id);
   };
 
@@ -51,8 +49,7 @@ const Profile = (props) => {
   const toggle = () => setModal(!modal);
 
   const profile = props.profile;
-  const table = profile.map((data) => {
-
+  const table = profile.map(data => {
     return (
       <tbody key={data.id}>
         <tr>
@@ -97,10 +94,17 @@ const Profile = (props) => {
       </tbody>
     );
   });
-  if (props.loading){
-    return <Spinner className="spinner" animation="border" variant="dark" role="status">
-    <span className="sr-only ">Loading...</span>
-       </Spinner>
+  if (props.loading) {
+    return (
+      <Spinner
+        className="spinner"
+        animation="border"
+        variant="dark"
+        role="status"
+      >
+        <span className="sr-only ">Loading...</span>
+      </Spinner>
+    );
   }
   return (
     <div className="all">
@@ -112,19 +116,19 @@ const Profile = (props) => {
           <li className="list-group-item">
             <h5>
               Orders in Transit:{" "}
-              {profile.filter((data) => data.status === "in transit").length}{" "}
+              {profile.filter(data => data.status === "in transit").length}{" "}
             </h5>
           </li>
           <li className="list-group-item">
             <h5>
               Delivered:{" "}
-              {profile.filter((data) => data.status === "delivered").length}{" "}
+              {profile.filter(data => data.status === "delivered").length}{" "}
             </h5>
           </li>
           <li className="list-group-item">
             <h5>
               Cancelled Orders:{" "}
-              {profile.filter((data) => data.status === "cancelled").length}
+              {profile.filter(data => data.status === "cancelled").length}
             </h5>
           </li>
         </ul>
@@ -148,16 +152,16 @@ const Profile = (props) => {
       </div>
     </div>
   );
-}
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   profile: state.profile.parcels,
-  loading: state.profile.loading
+  loading: state.profile.loading,
 });
 
 export default connect(mapStateToProps, {
   loadParcelsAction,
   editDestinationAction,
   cancelParcel,
-  setLoading
+  setLoading,
 })(Profile);

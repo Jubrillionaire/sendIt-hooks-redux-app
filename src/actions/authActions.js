@@ -1,11 +1,10 @@
-
 import { toast } from "react-toastify";
 
 toast.configure();
 
 const url = process.env.REACT_APP_API_URL;
 
-export const submitAction = (userDetails) => async () => {
+export const submitAction = userDetails => async () => {
   const { firstName, lastName, email, phoneNo, password } = userDetails;
   try {
     const response = await fetch(`${url}/users`, {
@@ -29,7 +28,7 @@ export const submitAction = (userDetails) => async () => {
     } else if (res.msg) {
       toast.error(res.msg);
     } else {
-      res.errors.forEach((err) => {
+      res.errors.forEach(err => {
         toast.error(err.nsg);
       });
     }
@@ -38,7 +37,7 @@ export const submitAction = (userDetails) => async () => {
   }
 };
 
-export const loginAction = (loginData) => async () => {
+export const loginAction = loginData => async () => {
   try {
     const { email, password } = loginData;
     const response = await fetch(`${url}/users/login`, {
@@ -70,6 +69,3 @@ export const loginAction = (loginData) => async () => {
     console.log(err);
   }
 };
-
-
-

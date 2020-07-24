@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { submitAction } from "../actions/authActions";
 toast.configure();
 
-const Register = (props)  => {
+const Register = props => {
   const details = {
     firstName: "",
     lastName: "",
@@ -18,16 +18,14 @@ const Register = (props)  => {
 
   const [user, setUser] = useState(details);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     props.submitAction(user);
   };
-
-
 
   const { firstName, lastName, email, phoneNo, password } = user;
   return (
@@ -96,6 +94,6 @@ const Register = (props)  => {
       <input type="submit" value="submit" />
     </Form>
   );
-}
+};
 
 export default connect(null, { submitAction })(Register);
