@@ -1,4 +1,4 @@
-import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS } from "./types";
+import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS, LOADING } from "./types";
 import { toast } from "react-toastify";
 
 const token = localStorage.getItem("token");
@@ -79,15 +79,16 @@ export const loadParcelsAction = () => async (dispatch) => {
     })
   }
     console.log(data)
-    // data.sort((a, b) => a.id - b.id);
-    // dispatch({
-    //   type: LOAD_PARCELS,
-    //   payload: data,
-    // });
+    data.sort((a, b) => a.id - b.id);
+    dispatch({
+      type: LOAD_PARCELS,
+      payload: data,
+    });
   } catch (err) {
     console.log(err);
   }
 };
+
 
 export const createOrderAction = (order) => async () => {
   try {
@@ -119,3 +120,9 @@ export const createOrderAction = (order) => async () => {
     console.log(err);
   }
 };
+
+export const setLoading = ()  => {
+    return {
+      type: LOADING
+    }
+}

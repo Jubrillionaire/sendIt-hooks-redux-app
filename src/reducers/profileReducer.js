@@ -1,4 +1,4 @@
-import { LOAD_PARCELS, FETCH_SUCCESS, FETCH_FAILURE } from "../actions/types";
+import { LOAD_PARCELS, FETCH_SUCCESS, FETCH_FAILURE, LOADING } from "../actions/types";
 
 const initialState = {
     parcels: [],
@@ -12,7 +12,7 @@ const initialState = {
             return{
                 ...state,
                 parcels: action.payload,
-                loading: true
+                loading: false
             };
             case FETCH_SUCCESS:
               return{
@@ -25,6 +25,13 @@ const initialState = {
                   loading: false,
                   errorMsg: action.payload
                 }
+                case LOADING:
+                return{
+                  ...state,
+                  loading: true,
+                  
+                }
+                
             default: return state;
     }
   }

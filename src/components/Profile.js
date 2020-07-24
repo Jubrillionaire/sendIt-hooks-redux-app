@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Spinner from 'react-bootstrap/Spinner'
 import {
   Button,
   Modal,
@@ -11,6 +12,7 @@ import {
   loadParcelsAction,
   editDestinationAction,
   cancelParcel,
+  setLoading
 } from "../actions/parcelActions";
 import { FaTrashAlt } from "react-icons/fa";
 import { connect } from "react-redux";
@@ -22,7 +24,10 @@ function Profile(props) {
  
   useEffect( ()  => {
     props.loadParcelsAction();
-  })
+    props.setLoading()
+  }, [])
+
+
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
@@ -48,6 +53,7 @@ function Profile(props) {
 
   const profile = props.profile;
   const table = profile.map((data) => {
+
     return (
       <tbody key={data.id}>
         <tr>
@@ -75,7 +81,6 @@ function Profile(props) {
               </Modal>
             </Button>
           </span>
-
           <th scope="row">{data.id}</th>
           <td>{data.pickup_location}</td>
           <td>{data.destination}</td>
@@ -93,6 +98,11 @@ function Profile(props) {
       </tbody>
     );
   });
+  if (props.loading){
+    return <Spinner className="spinner" animation="border" variant="dark" role="status">
+    <span className="sr-only ">Loading...</span>
+       </Spinner>
+  }
   return (
     <div className="all">
       <div className="card" style={{ width: "20rem" }}>
@@ -143,10 +153,12 @@ function Profile(props) {
 
 const mapStateToProps = (state) => ({
   profile: state.profile.parcels,
+  loading: state.profile.loading
 });
 
 export default connect(mapStateToProps, {
   loadParcelsAction,
   editDestinationAction,
   cancelParcel,
+  setLoading
 })(Profile);
