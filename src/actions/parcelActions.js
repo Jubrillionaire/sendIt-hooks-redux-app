@@ -7,7 +7,7 @@ const url = process.env.REACT_APP_API_URL;
 
 toast.configure();
 
-export const cancelParcel = (id) => async () => {
+export const cancelParcel = id => async () => {
   try {
     if (window.confirm("are you sure you want to delete this parcel?")) {
       const response = await fetch(`${url}/parcels/cancel`, {
@@ -57,7 +57,7 @@ export const editDestinationAction = (destination, id) => async () => {
   }
 };
 
-export const loadParcelsAction = () => async (dispatch) => {
+export const loadParcelsAction = () => async dispatch => {
   try {
     const response = await fetch(`${url}/users/${userId}/parcels`, {
       headers: {
@@ -67,18 +67,17 @@ export const loadParcelsAction = () => async (dispatch) => {
     });
     const res = await response;
     const data = await response.json();
-  if(res.status === 200){
-       dispatch({
-      type: FETCH_SUCCESS,
-    })
-  }
-  else if (res.status === 400){
-    dispatch({
-      type: FETCH_FAILURE,
-      payload: "sorry, unable to fetch parcels"
-    })
-  }
-    console.log(data)
+    if (res.status === 200) {
+      dispatch({
+        type: FETCH_SUCCESS,
+      });
+    } else if (res.status === 400) {
+      dispatch({
+        type: FETCH_FAILURE,
+        payload: "sorry, unable to fetch parcels",
+      });
+    }
+    console.log(data);
     data.sort((a, b) => a.id - b.id);
     dispatch({
       type: LOAD_PARCELS,
@@ -89,8 +88,7 @@ export const loadParcelsAction = () => async (dispatch) => {
   }
 };
 
-
-export const createOrderAction = (order) => async () => {
+export const createOrderAction = order => async () => {
   try {
     const { pickupLocation, destination, recipientName, recipientNo } = order;
     const response = await fetch(`${url}/parcels`, {
@@ -112,7 +110,7 @@ export const createOrderAction = (order) => async () => {
       toast.success(data.msg);
       window.location = "/user";
     } else {
-      data.errors.forEach((err) => {
+      data.errors.forEach(err => {
         toast.error(err.msg);
       });
     }
@@ -121,8 +119,8 @@ export const createOrderAction = (order) => async () => {
   }
 };
 
-export const setLoading = ()  => {
-    return {
-      type: LOADING
-    }
-}
+export const setLoading = () => {
+  return {
+    type: LOADING,
+  };
+};
