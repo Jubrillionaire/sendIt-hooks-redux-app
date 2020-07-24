@@ -19,8 +19,7 @@ import { connect } from "react-redux";
 import "../styles/profile.css";
 
 const Profile = (props) => {
-  var subtitle;
-
+  let subtitle;
  
   useEffect( ()  => {
     props.loadParcelsAction();
