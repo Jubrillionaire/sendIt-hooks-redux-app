@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from './images/parcel.png'
+import Logo from '../images/parcel.png'
 import {NavLink, Link} from 'react-router-dom'
 const token = localStorage.getItem("token")
 const role = localStorage.getItem("role")

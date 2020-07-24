@@ -1,7 +1,7 @@
 import React from 'react'
-import Victoria from "./images/victoria.jpg"
-import Brett from "./images/brett.jpg"
-import Lucian from "./images/lucian.jpg"
+import Victoria from "../images/victoria.jpg"
+import Brett from "../images/brett.jpg"
+import Lucian from "../images/lucian.jpg"
 
 
 
