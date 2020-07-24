@@ -1,7 +1,9 @@
-import { LOAD_PARCELS } from "../actions/types";
+import { LOAD_PARCELS, FETCH_SUCCESS, FETCH_FAILURE } from "../actions/types";
 
 const initialState = {
     parcels: [],
+    loading: false,
+    errorMsg: ""
   };
 
   export default function (state = initialState, action){
@@ -9,9 +11,20 @@ const initialState = {
         case LOAD_PARCELS:
             return{
                 ...state,
-                parcels: action.payload
+                parcels: action.payload,
+                loading: true
             };
-       
+            case FETCH_SUCCESS:
+              return{
+                ...state,
+                loading: false
+              };
+              case FETCH_FAILURE:
+                return{
+                  ...state,
+                  loading: false,
+                  errorMsg: action.payload
+                }
             default: return state;
     }
   }

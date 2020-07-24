@@ -1,4 +1,4 @@
-import { LOAD_PARCELS } from "./types";
+import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS } from "./types";
 import { toast } from "react-toastify";
 
 const token = localStorage.getItem("token");
@@ -59,18 +59,31 @@ export const editDestinationAction = (destination, id) => async () => {
 
 export const loadParcelsAction = () => async (dispatch) => {
   try {
-    const res = await fetch(`${url}/users/${userId}/parcels`, {
+    const response = await fetch(`${url}/users/${userId}/parcels`, {
       headers: {
         "Content-type": "Application/json",
         Authorization: token,
       },
     });
-    const data = await res.json();
-    data.sort((a, b) => a.id - b.id);
+    const res = await response;
+    const data = await response.json();
+  if(res.status === 200){
+       dispatch({
+      type: FETCH_SUCCESS,
+    })
+  }
+  else if (res.status === 400){
     dispatch({
-      type: LOAD_PARCELS,
-      payload: data,
-    });
+      type: FETCH_FAILURE,
+      payload: "sorry, unable to fetch parcels"
+    })
+  }
+    console.log(data)
+    // data.sort((a, b) => a.id - b.id);
+    // dispatch({
+    //   type: LOAD_PARCELS,
+    //   payload: data,
+    // });
   } catch (err) {
     console.log(err);
   }
