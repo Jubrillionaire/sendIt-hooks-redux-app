@@ -16,7 +16,7 @@ const token = localStorage.getItem("token");
 const App = () => {
   return (
     <Provider store={store}>
-      <NavBar />
+      {/* <NavBar /> */}
       <Route
         exact
         path="/"
@@ -24,6 +24,7 @@ const App = () => {
           return <Home />;
         }}
       />
+
       <Route
         path="/register"
         render={() => {
