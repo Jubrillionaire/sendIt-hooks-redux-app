@@ -28,14 +28,15 @@ const Profile = props => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
-  const [cancelId, setCancelId] = useState(null)
+  const [cancelId, setCancelId] = useState(null);
+  const [editId, setEditId] = useState(null)
 
   const handleChange = e => {
     setDestination(e.target.value);
   };
 
   const handleEdit = id => {
-    props.editDestinationAction(destination, id);
+    props.editDestinationAction(destination, editId);
     setModal(false);
   };
 
@@ -48,7 +49,10 @@ const Profile = props => {
 
   const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal);
+  const toggle = (id) => {
+    setModal(!modal);
+    setEditId(id)
+  }
 
   const profile = props.profile;
   const table = profile.map(data => {
@@ -56,7 +60,7 @@ const Profile = props => {
       <tbody key={data.id}>
         <tr>
           <span>
-            <Button color="danger" onClick={toggle}>
+            <Button color="danger" onClick={() => toggle(data.id)}>
               edit destination
               <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}>
@@ -69,7 +73,7 @@ const Profile = props => {
                   </form>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="primary" onClick={() => handleEdit(data.id)}>
+                  <Button color="primary" onClick={() => handleEdit()}>
                     Submit
                   </Button>{" "}
                   <Button color="secondary" onClick={toggle}>

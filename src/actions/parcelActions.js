@@ -33,6 +33,7 @@ export const cancelParcel = id => async dispatch => {
 };
 
 export const editDestinationAction = (destination, id) => async () => {
+  console.log(id)
   try {
     const response = await fetch(`${url}/parcels/destination`, {
       method: "PATCH",
@@ -51,7 +52,7 @@ export const editDestinationAction = (destination, id) => async () => {
     if (data.msg) {
       toast.success(data.msg);
     }
-    window.location.reload();
+   // window.location.reload();
   } catch (err) {
     console.log(err);
   }
