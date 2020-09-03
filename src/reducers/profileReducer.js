@@ -2,14 +2,15 @@ import {
   LOAD_PARCELS,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-  LOADING
+  LOADING,
+  EDIT_PARCEL
 } from "../actions/types";
 
 const initialState = {
   parcels: [],
   loading: false,
   errorMsg: "",
-  cancelMsg: "",
+  editMsg: "",
 };
 
 export default (state = initialState, action) => {
@@ -36,6 +37,11 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
+      case EDIT_PARCEL:
+        return {
+          ...state,
+          editMsg: action.payload
+        };
 
     default:
       return state;

@@ -1,4 +1,11 @@
-import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS, LOADING, CANCEL_PARCEL } from "./types";
+import {
+  LOAD_PARCELS,
+  FETCH_FAILURE,
+  FETCH_SUCCESS,
+  LOADING,
+  CANCEL_PARCEL,
+  EDIT_PARCEL,
+} from "./types";
 import { toast } from "react-toastify";
 
 const token = localStorage.getItem("token");
@@ -7,7 +14,7 @@ const url = process.env.REACT_APP_API_URL;
 
 toast.configure();
 
-export const cancelParcel = id => async dispatch => {
+export const cancelParcel = (id) => async (dispatch) => {
   try {
     if (window.confirm("are you sure you want to delete this parcel?")) {
       const response = await fetch(`${url}/parcels/cancel`, {
@@ -22,7 +29,7 @@ export const cancelParcel = id => async dispatch => {
         }),
       });
       const data = await response.json();
-      console.log(data, "parcel canceled")
+      console.log(data, "parcel canceled");
       if (data.msg) {
         toast.success(data.msg);
       }
@@ -32,8 +39,8 @@ export const cancelParcel = id => async dispatch => {
   }
 };
 
-export const editDestinationAction = (destination, id) => async () => {
-  console.log(id)
+export const editDestinationAction = (destination, id) => async (dispatch) => {
+  console.log(id);
   try {
     const response = await fetch(`${url}/parcels/destination`, {
       method: "PATCH",
@@ -52,13 +59,16 @@ export const editDestinationAction = (destination, id) => async () => {
     if (data.msg) {
       toast.success(data.msg);
     }
-   // window.location.reload();
+    dispatch({
+      type: EDIT_PARCEL,
+      payload: data.msg,
+    });
   } catch (err) {
     console.log(err);
   }
 };
 
-export const loadParcelsAction = () => async dispatch => {
+export const loadParcelsAction = () => async (dispatch) => {
   try {
     const response = await fetch(`${url}/users/${userId}/parcels`, {
       headers: {
@@ -89,7 +99,7 @@ export const loadParcelsAction = () => async dispatch => {
   }
 };
 
-export const createOrderAction = order => async () => {
+export const createOrderAction = (order) => async () => {
   try {
     const { pickupLocation, destination, recipientName, recipientNo } = order;
     const response = await fetch(`${url}/parcels`, {
@@ -111,7 +121,7 @@ export const createOrderAction = order => async () => {
       toast.success(data.msg);
       window.location = "/user";
     } else {
-      data.errors.forEach(err => {
+      data.errors.forEach((err) => {
         toast.error(err.msg);
       });
     }
