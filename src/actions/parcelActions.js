@@ -1,4 +1,4 @@
-import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS, LOADING } from "./types";
+import { LOAD_PARCELS, FETCH_FAILURE, FETCH_SUCCESS, LOADING, CANCEL_PARCEL } from "./types";
 import { toast } from "react-toastify";
 
 const token = localStorage.getItem("token");
@@ -7,7 +7,7 @@ const url = process.env.REACT_APP_API_URL;
 
 toast.configure();
 
-export const cancelParcel = id => async () => {
+export const cancelParcel = id => async dispatch => {
   try {
     if (window.confirm("are you sure you want to delete this parcel?")) {
       const response = await fetch(`${url}/parcels/cancel`, {
@@ -22,10 +22,15 @@ export const cancelParcel = id => async () => {
         }),
       });
       const data = await response.json();
+      console.log(data, "parcel canceled")
       if (data.msg) {
         toast.success(data.msg);
       }
       window.location.reload();
+      dispatch({
+        type: CANCEL_PARCEL,
+        payload: data.msg,
+      });
     }
   } catch (err) {
     console.log(err);

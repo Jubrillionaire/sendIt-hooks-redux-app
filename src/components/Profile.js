@@ -24,7 +24,7 @@ const Profile = props => {
   useEffect(() => {
     props.loadParcelsAction();
     props.setLoading();
-  }, []);
+  }, [props.cancelMsg]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
@@ -157,6 +157,7 @@ const Profile = props => {
 const mapStateToProps = state => ({
   profile: state.profile.parcels,
   loading: state.profile.loading,
+  cancelMsg: state.profile.cancelMsg
 });
 
 export default connect(mapStateToProps, {

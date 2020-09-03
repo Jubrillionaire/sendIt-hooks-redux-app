@@ -4,6 +4,8 @@ toast.configure();
 
 const url = process.env.REACT_APP_API_URL;
 
+console.log(url);
+
 export const submitAction = userDetails => async () => {
   const { firstName, lastName, email, phoneNo, password } = userDetails;
   try {
@@ -21,6 +23,7 @@ export const submitAction = userDetails => async () => {
       }),
     });
     const res = await response.json();
+    console.log(res);
     if (res.token) {
       localStorage.setItem("token", res.token);
       toast.success(res.msg);
