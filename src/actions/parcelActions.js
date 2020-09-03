@@ -26,11 +26,6 @@ export const cancelParcel = id => async dispatch => {
       if (data.msg) {
         toast.success(data.msg);
       }
-      window.location.reload();
-      dispatch({
-        type: CANCEL_PARCEL,
-        payload: data.msg,
-      });
     }
   } catch (err) {
     console.log(err);

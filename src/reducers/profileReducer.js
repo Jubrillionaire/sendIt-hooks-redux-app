@@ -2,8 +2,7 @@ import {
   LOAD_PARCELS,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-  LOADING,
-  CANCEL_PARCEL,
+  LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -36,12 +35,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-      };
-
-    case CANCEL_PARCEL:
-      return {
-        ...state,
-        cancelMsg: action.payload,
       };
 
     default:

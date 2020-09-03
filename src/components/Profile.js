@@ -24,10 +24,11 @@ const Profile = props => {
   useEffect(() => {
     props.loadParcelsAction();
     props.setLoading();
-  }, [props.cancelMsg]);
+  }, []);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
+  const [cancelId, setCancelId] = useState(null)
 
   const handleChange = e => {
     setDestination(e.target.value);
@@ -40,6 +41,7 @@ const Profile = props => {
 
   const handleCancel = id => {
     props.cancelParcel(id);
+    setCancelId(id)
   };
 
   const { buttonLabel, className } = props;
@@ -84,7 +86,7 @@ const Profile = props => {
           <td>{data.recipient_phone_no}</td>
           <td>{data.status}</td>
           <button
-            disabled={data.status === "cancelled" ? true : false}
+            disabled={data.id === cancelId || data.status === "cancelled" ? true : false}
             onClick={() => handleCancel(data.id)}
             className="btn btn-danger p-1 pri"
           >
@@ -157,7 +159,6 @@ const Profile = props => {
 const mapStateToProps = state => ({
   profile: state.profile.parcels,
   loading: state.profile.loading,
-  cancelMsg: state.profile.cancelMsg
 });
 
 export default connect(mapStateToProps, {
