@@ -3,11 +3,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { createOrderAction } from "../actions/parcelActions";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+
 
 toast.configure();
 
 const CreateOrder = props => {
+
+  const history = useHistory();
+
   const orderDetails = {
     pickupLocation: "",
     destination: "",
@@ -21,10 +26,17 @@ const CreateOrder = props => {
     setOrder({ ...order, [e.target.name]: e.target.value });
   };
 
+  console.log(props.createMsg)
+
   const handleSubmit = e => {
     e.preventDefault();
-    props.createOrderAction(order);
+    props.createOrderAction(order)
+    
   };
+
+  if(props.createMsg){
+    history.push("/user");
+   }
 
   return (
     <Form className="input" onSubmit={handleSubmit}>
@@ -78,4 +90,8 @@ const CreateOrder = props => {
   );
 };
 
-export default connect(null, { createOrderAction })(CreateOrder);
+const mapStateToProps = state => ({
+  createMsg: state.profile.createMsg
+})
+
+export default connect(mapStateToProps, { createOrderAction })(CreateOrder);

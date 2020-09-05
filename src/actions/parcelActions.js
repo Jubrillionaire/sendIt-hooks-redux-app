@@ -5,8 +5,10 @@ import {
   LOADING,
   CANCEL_PARCEL,
   EDIT_PARCEL,
+  CREATE_PARCEL,
 } from "./types";
 import { toast } from "react-toastify";
+import { browserHistory } from 'react-router'
 
 const token = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
@@ -29,7 +31,7 @@ export const cancelParcel = (id) => async (dispatch) => {
         }),
       });
       const data = await response.json();
-      console.log(data, "parcel canceled");
+    
       if (data.msg) {
         toast.success(data.msg);
       }
@@ -40,7 +42,6 @@ export const cancelParcel = (id) => async (dispatch) => {
 };
 
 export const editDestinationAction = (destination, id) => async (dispatch) => {
-  console.log(id);
   try {
     const response = await fetch(`${url}/parcels/destination`, {
       method: "PATCH",
@@ -55,7 +56,6 @@ export const editDestinationAction = (destination, id) => async (dispatch) => {
       }),
     });
     const data = await response.json();
-    console.log(data);
     if (data.msg) {
       toast.success(data.msg);
     }
@@ -88,7 +88,7 @@ export const loadParcelsAction = () => async (dispatch) => {
         payload: "sorry, unable to fetch parcels",
       });
     }
-    console.log(data);
+
     data.sort((a, b) => a.id - b.id);
     dispatch({
       type: LOAD_PARCELS,
@@ -99,7 +99,7 @@ export const loadParcelsAction = () => async (dispatch) => {
   }
 };
 
-export const createOrderAction = (order) => async () => {
+export const createOrderAction = (order) => async (dispatch) => {
   try {
     const { pickupLocation, destination, recipientName, recipientNo } = order;
     const response = await fetch(`${url}/parcels`, {
@@ -119,7 +119,11 @@ export const createOrderAction = (order) => async () => {
     const data = await response.json();
     if (data.success === true) {
       toast.success(data.msg);
-      window.location = "/user";
+      dispatch({
+        type: CREATE_PARCEL,
+        payload: data.msg
+      })
+      //window.location = "/user";
     } else {
       data.errors.forEach((err) => {
         toast.error(err.msg);

@@ -3,7 +3,8 @@ import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
   LOADING,
-  EDIT_PARCEL
+  EDIT_PARCEL,
+  CREATE_PARCEL
 } from "../actions/types";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   loading: false,
   errorMsg: "",
   editMsg: "",
+  createMsg: ""
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +43,11 @@ export default (state = initialState, action) => {
         return {
           ...state,
           editMsg: action.payload
+        };
+        case CREATE_PARCEL:
+        return {
+          ...state,
+          createMsg: action.payload
         };
 
     default:
