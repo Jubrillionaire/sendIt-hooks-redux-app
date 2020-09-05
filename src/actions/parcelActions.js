@@ -8,7 +8,7 @@ import {
   CREATE_PARCEL,
 } from "./types";
 import { toast } from "react-toastify";
-import { browserHistory } from 'react-router'
+
 
 const token = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");

@@ -85,7 +85,6 @@ const CreateOrder = props => {
         />
       </FormGroup>
       <input type="submit" value="create" />
-      {/* <Button>Create Order</Button> */}
     </Form>
   );
 };

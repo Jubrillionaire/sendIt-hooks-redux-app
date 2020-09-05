@@ -4,3 +4,5 @@ export const FETCH_FAILURE = "FETCH_FAILURE";
 export const LOADING = "LOADING";
 export const EDIT_PARCEL = "EDIT_PARCEL"
 export const CREATE_PARCEL = "CREATE_PARCEL"
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER"
