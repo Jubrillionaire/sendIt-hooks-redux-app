@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { REGISTER, LOGIN } from "./types";
 
 toast.configure();
 
@@ -6,7 +7,7 @@ const url = process.env.REACT_APP_API_URL;
 
 
 
-export const submitAction = userDetails => async () => {
+export const submitAction = userDetails => async dispatch => {
   const { firstName, lastName, email, phoneNo, password } = userDetails;
   try {
     const response = await fetch(`${url}/users`, {
@@ -27,7 +28,11 @@ export const submitAction = userDetails => async () => {
     if (res.token) {
       localStorage.setItem("token", res.token);
       toast.success(res.msg);
-      window.location = "/user";
+     dispatch({
+       type: REGISTER,
+       payload: res.msg
+     })
+     // window.location = "/user";
     } else if (res.msg) {
       toast.error(res.msg);
     } else {
@@ -40,7 +45,7 @@ export const submitAction = userDetails => async () => {
   }
 };
 
-export const loginAction = loginData => async () => {
+export const loginAction = loginData => async dispatch => {
   try {
     const { email, password } = loginData;
     const response = await fetch(`${url}/users/login`, {
@@ -64,7 +69,11 @@ export const loginAction = loginData => async () => {
       localStorage.setItem("token", res.token);
       localStorage.setItem("userId", res.userId);
       toast.success(res.msg);
-      window.location = "/user";
+      dispatch({
+        type: LOGIN,
+        payload: res.msg
+      })
+     // window.location = "/user";
     } else if (res.msg) {
       toast.error(res.msg);
     }
