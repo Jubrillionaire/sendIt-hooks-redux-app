@@ -25,8 +25,7 @@ const Profile = props => {
     props.loadParcelsAction();
     props.setLoading();
   }, [props.editMsg]);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  
   const [destination, setDestination] = useState("");
   const [cancelId, setCancelId] = useState(null);
   const [editId, setEditId] = useState(null)

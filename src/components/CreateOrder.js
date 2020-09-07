@@ -26,7 +26,6 @@ const CreateOrder = props => {
     setOrder({ ...order, [e.target.name]: e.target.value });
   };
 
-  console.log(props.createMsg)
 
   const handleSubmit = e => {
     e.preventDefault();

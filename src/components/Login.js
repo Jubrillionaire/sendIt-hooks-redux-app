@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, withRouter, Redirect } from "react-router-dom";
 import "../styles/login.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { loginAction } from "../actions/authActions";
 import { connect } from "react-redux";
 
+
+
 const Login = props => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+
+  const history = useHistory();
+
 
   const handleChange = e => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -14,8 +19,16 @@ const Login = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.loginAction(loginData);
+    props.loginAction(loginData)
+
   };
+
+
+
+  if(props.loginMsg){
+   history.push("/user");
+}
+
 
   const { email, password } = loginData;
   return (
@@ -50,4 +63,8 @@ const Login = props => {
   );
 };
 
-export default connect(null, { loginAction })(Login);
+const mapstateToProps = state => ({
+    loginMsg: state.auth.loginMsg
+})
+
+export default connect(mapstateToProps, { loginAction })(Login);
